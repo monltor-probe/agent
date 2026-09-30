@@ -21,6 +21,8 @@ tokio-tungstenite = { version = "0.28", default-features = false, features = ["c
 rustls = { version = "0.23", default-features = false, features = ["ring", "std", "tls12"] }
 futures-util = { version = "0.3", default-features = false, features = ["sink"] }
 if-addrs = "0.15.0"
+axum = { version = "0.8", features = ["ws"] }
+portable-pty = "0.9"
 
 [dev-dependencies]
 # Only the tests need a movable clock; the write-deadline arithmetic spans

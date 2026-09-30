@@ -1,6 +1,7 @@
 //! monitor-agent: reports one Linux host to a monitor hub over WebSocket.
 
 mod collect;
+mod ssh;
 
 use std::time::Duration;
 
@@ -194,6 +195,11 @@ async fn main() -> Result<()> {
         "counting traffic on: {}",
         if counted.is_empty() { "none".to_owned() } else { counted.join(" ") }
     );
+    tokio::spawn(async move {
+        if let Err(e) = ssh::serve().await {
+            eprintln!("ssh: {e:#}");
+        }
+    });
     let mut wait = 0u64;
 
     loop {
